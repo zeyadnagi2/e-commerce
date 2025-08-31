@@ -5,10 +5,11 @@ import { ProductsService } from '../../../shared/services/Products/products.serv
 import { IProduct } from '../../../core/interfaces/iproduct.interface';
 import { CategoriesSliderComponent } from './components/categories-slider/categories-slider.component';
 import { MainSliderComponent } from './components/main-slider/main-slider.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [CategoriesSliderComponent, MainSliderComponent, CarouselModule],
+  imports: [CategoriesSliderComponent, MainSliderComponent, CarouselModule,RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })

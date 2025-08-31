@@ -21,10 +21,12 @@ export const routes: Routes = [
 
     {path:'' , component:MainLayoutComponent , children:[
         {path:'home' , component:HomeComponent , title:'Home'},
-        {path:'brands' , component:BrandsComponent , title:'Home'},
-        {path:'categories' , component:CategoriesComponent , title:'Home'},
-        {path:'cart' , component:CartComponent , title:'Home'},
-        {path:'products' , component:ProductsComponent , title:'Home'},
+        {path:'brands' , component:BrandsComponent , title:'Brands'},
+        {path:'categories' , component:CategoriesComponent , title:'Categories'},
+        {path:'cart' , component:CartComponent , title:'Cart'},
+        {path:'products' , component:ProductsComponent , title:'Products'},
+        {path:'p-details' , loadComponent: ()=> import('./features/components/p-details/p-details.component').then((c)=>c.PDetailsComponent) , title:'Product Details'},
+        
     ]},
     {path:"**" , component:NotfoundComponent , title:'404'}
 
