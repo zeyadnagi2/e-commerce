@@ -17,7 +17,7 @@
     <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
       @for (product of products.slice(0,12); track product._id) {
       <div class="outter p-2">
-        <div class="product p-3" routerLink="/p-details">
+        <div class="product p-3" [routerLink]="['/p-details' , product._id]">
           <img [src]="product.imageCover" class="w-full block" [alt]="product.title" />
           <h1 class="text-emerald-400 font-bold pt-1.5">Title: {{ product.title.split(' ', 3).join(' ') }}</h1>
           <h1 class="text-emerald-400">Price: {{ product.price }}</h1>
