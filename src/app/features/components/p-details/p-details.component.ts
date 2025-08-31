@@ -1,11 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ProductsService } from '../../../shared/services/Products/products.service';
 import { IProduct } from '../../../core/interfaces/iproduct.interface';
+import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
   selector: 'app-p-details',
-  imports: [],
+  imports: [CarouselModule ,RouterLink],
   templateUrl: './p-details.component.html',
   styleUrl: './p-details.component.css',
 })
@@ -13,7 +14,7 @@ export class PDetailsComponent implements OnInit {
   private readonly _ActivatedRoute = inject(ActivatedRoute);
   private readonly _ProductsService = inject(ProductsService);
 
-  productDetails:IProduct = {} as IProduct;
+  productDetails: IProduct = {} as IProduct;
   productId!: string;
 
   ngOnInit(): void {
@@ -32,4 +33,34 @@ export class PDetailsComponent implements OnInit {
       },
     });
   }
+
+  customOptions: OwlOptions = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: true,
+    margin: 7,
+    autoplay: false,
+    autoplaySpeed: 600,
+    autoplayTimeout: 1500,
+    navSpeed: 700,
+    autoplayHoverPause: true,
+    navText: ['', ''],
+    responsive: {
+      0: {
+        items: 1,
+      },
+      400: {
+        items: 2,
+      },
+      740: {
+        items: 3,
+      },
+      940: {
+        items: 6,
+      },
+    },
+    nav: false,
+  };
 }
