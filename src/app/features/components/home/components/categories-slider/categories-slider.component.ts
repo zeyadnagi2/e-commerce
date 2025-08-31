@@ -13,11 +13,16 @@ export class CategoriesSliderComponent {
 
     customOptions: OwlOptions = {
       loop: true,
-      mouseDrag: false,
-      touchDrag: false,
-      pullDrag: false,
-      dots: false,
+      mouseDrag: true,
+      touchDrag: true,
+      pullDrag: true,
+      dots: true,
+      margin:7,
+      autoplay:true,
+      autoplaySpeed:600,
+      autoplayTimeout: 1500,
       navSpeed: 700,
+      autoplayHoverPause:true,
       navText: ['', ''],
       responsive: {
         0: {
@@ -30,10 +35,10 @@ export class CategoriesSliderComponent {
           items: 3,
         },
         940: {
-          items: 4,
+          items: 6,
         },
       },
-      nav: true,
+      nav: false,
     };
   
 
