@@ -90,7 +90,3 @@ body {
 .section-head{
   @apply text-emerald-400 text-center text-4xl my-3 font-extrabold
 }
-
-.main-btn{
-  @apply bg-green-500 cursor-pointer p-1 w-full blocks rounded-xl hover:bg-green-400 duration-500 text-white font-bold
-}
