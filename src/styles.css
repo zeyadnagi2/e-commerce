@@ -1,19 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
-@import "flowbite/src/themes/default";
+@import 'flowbite/src/themes/default';
 @plugin "flowbite/plugin";
 @source "../node_modules/flowbite";
-@import "tailwindcss";
+@import 'tailwindcss';
 
-
-@import url("https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@300&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@300&display=swap');
 
 :root {
   --main-color: #0aad0a;
   --light-color: #f0f3f2;
-  --shadow: rgba(145, 158, 171, 0.2) 0px 2px 4px -1px,
-    rgba(145, 158, 171, 0.14) 0px 4px 5px 0px,
+  --shadow: rgba(145, 158, 171, 0.2) 0px 2px 4px -1px, rgba(145, 158, 171, 0.14) 0px 4px 5px 0px,
     rgba(145, 158, 171, 0.12) 0px 1px 10px 0px;
-  --font-family: "Encode Sans Expanded", sans-serif;
+  --font-family: 'Encode Sans Expanded', sans-serif;
   --rating-color: #ffc908;
 }
 
@@ -79,14 +77,14 @@ body {
   background-color: #11bd11;
 }
 
-.main-section{
-  @apply bg-gray-200 p-2
+.main-section {
+  @apply bg-gray-200 p-2;
 }
 
-.main-container{
-  @apply container mx-auto
+.main-container {
+  @apply container mx-auto;
 }
 
-.section-head{
-  @apply text-emerald-400 text-center text-4xl my-3 font-extrabold
+.section-head {
+  @apply text-emerald-400 text-center text-4xl my-3 font-extrabold;
 }
