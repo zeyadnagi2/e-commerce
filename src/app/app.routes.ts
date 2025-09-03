@@ -25,7 +25,7 @@ export const routes: Routes = [
         {path:'categories' , component:CategoriesComponent , title:'Categories'},
         {path:'cart' , component:CartComponent , title:'Cart'},
         {path:'products' , component:ProductsComponent , title:'Products'},
-        {path:'p_details/:p_id' , loadComponent: ()=> import('./features/components/p-details/p-details.component').then((c)=>c.PDetailsComponent) , title:'Product Details'},
+        {path:'p-details/:p_id' , loadComponent: ()=> import('./features/components/p-details/p-details.component').then((c)=>c.PDetailsComponent) , title:'Product Details'},
         
     ]},
     {path:"**" , component:NotfoundComponent , title:'404'}
