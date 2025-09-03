@@ -4,6 +4,7 @@
     <form [formGroup]="registerForm" (ngSubmit)="register()">
       <div class="relative py-2">
         <input
+          formControlName="name"
           type="text"
           id="floating_outlined"
           class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-emerald-400 peer"
@@ -15,10 +16,22 @@
           >Name</label
         >
       </div>
+      @if (registerForm.get('name')?.errors && registerForm.get('name')?.touched) {
+      <div class="bg-red-400 p-5 my-2 rounded-3xl font-bold">
+        @if (registerForm.get('name')?.getError('required')) {
+        <p class="text-l">Name is Requaired !!!!</p>
+        } @if(registerForm.get('name')?.getError('minlength')){
+        <p class="text-l">Name is Short !!!!</p>
+        } @if (registerForm.get('name')?.getError('maxlength')) {
+        <p class="text-l">Name is Long !!!!</p>
+        }
+      </div>
+      }
 
       <div class="relative py-2">
         <input
-          type="text"
+          formControlName="email"
+          type="email"
           id="floating_outlined"
           class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-emerald-400 peer"
           placeholder=" "
@@ -31,7 +44,8 @@
       </div>
       <div class="relative py-2">
         <input
-          type="text"
+          formControlName="password"
+          type="password"
           id="floating_outlined"
           class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-emerald-400 peer"
           placeholder=" "
@@ -44,7 +58,8 @@
       </div>
       <div class="relative py-2">
         <input
-          type="text"
+          formControlName="rePassword"
+          type="password"
           id="floating_outlined"
           class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-emerald-400 peer"
           placeholder=" "
@@ -57,7 +72,8 @@
       </div>
       <div class="relative py-2">
         <input
-          type="text"
+          formControlName="phone"
+          type="tel"
           id="floating_outlined"
           class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-emerald-400 peer"
           placeholder=" "
@@ -69,7 +85,7 @@
         >
       </div>
 
-      <button class="mt-1.5 main-btn">register</button>
+      <button [disabled]="registerForm.invalid" class="mt-1.5 main-btn">register</button>
     </form>
   </div>
 </section>

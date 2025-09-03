@@ -90,5 +90,5 @@ body {
 }
 
 .main-btn {
-  @apply bg-green-500 cursor-pointer p-1 w-full block rounded-xl hover:bg-green-400 duration-500 text-white font-bold;
+  @apply disabled:bg-gray-500 disabled:cursor-no-drop bg-green-500 cursor-pointer p-1 w-full block rounded-xl hover:bg-green-400 duration-500 text-white font-bold;
 }
