@@ -4,6 +4,10 @@
     <form [formGroup]="registerForm" (ngSubmit)="register()">
       <div class="relative py-2">
         <input
+          [class]="{
+            'my-valid' : !registerForm.get('name')?.errors && registerForm.get('name')?.touched,
+            'my-invalid' : registerForm.get('name')?.errors && registerForm.get('name')?.touched,
+          }"
           formControlName="name"
           type="text"
           id="floating_outlined"
@@ -11,8 +15,12 @@
           placeholder=" "
         />
         <label
+          [class]="{
+            'l-my-valid' : !registerForm.get('name')?.errors && registerForm.get('name')?.touched,
+            'l-my-invalid' : registerForm.get('name')?.errors && registerForm.get('name')?.touched,
+          }"
           for="floating_outlined"
-          class="absolute font-bold text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-gray-200 px-2 peer-focus:px-2 peer-focus:text-emerald-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
+          class="absolute p-1 font-bold text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-gray-200 px-2 peer-focus:px-2 peer-focus:text-emerald-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
           >Name</label
         >
       </div>
@@ -30,6 +38,10 @@
 
       <div class="relative py-2">
         <input
+          [class]="{
+            'my-valid' : !registerForm.get('email')?.errors && registerForm.get('email')?.touched,
+            'my-invalid' : registerForm.get('email')?.errors && registerForm.get('email')?.touched,
+          }"
           formControlName="email"
           type="email"
           id="floating_outlined"
@@ -37,53 +49,138 @@
           placeholder=" "
         />
         <label
+          [class]="{
+            'l-my-valid' : !registerForm.get('email')?.errors && registerForm.get('email')?.touched,
+            'l-my-invalid' : registerForm.get('email')?.errors && registerForm.get('email')?.touched,
+          }"
           for="floating_outlined"
-          class="absolute font-bold text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-gray-200 px-2 peer-focus:px-2 peer-focus:text-emerald-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
+          class="absolute p-1 font-bold text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-gray-200 px-2 peer-focus:px-2 peer-focus:text-emerald-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
           >Email</label
         >
       </div>
+      @if (registerForm.get('email')?.errors && registerForm.get('email')?.touched) {
+      <div class="bg-red-400 p-5 my-2 rounded-3xl font-bold">
+        @if (registerForm.get('email')?.getError('required')) {
+        <p class="text-l">Email is Requaired !!!!</p>
+        } @if(registerForm.get('email')?.getError('email')){
+        <p class="text-l">Email is Not Valid !!!!</p>
+        }
+      </div>
+      }
+
       <div class="relative py-2">
         <input
+          [class]="{
+            'my-valid':
+              !registerForm.get('password')?.errors && registerForm.get('password')?.touched,
+            'my-invalid':
+              registerForm.get('password')?.errors && registerForm.get('password')?.touched
+          }"
           formControlName="password"
           type="password"
-          id="floating_outlined"
-          class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-emerald-400 peer"
+          id="password_input"
+          class="peer block w-full px-2.5 pb-2.5 pt-4 text-sm text-gray-900 bg-transparent rounded-lg border border-gray-300 focus:outline-none focus:ring-0 focus:border-emerald-400"
           placeholder=" "
         />
         <label
-          for="floating_outlined"
-          class="absolute font-bold text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-gray-200 px-2 peer-focus:px-2 peer-focus:text-emerald-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
-          >Password</label
+          [class]="{
+            'l-my-valid':
+              !registerForm.get('password')?.errors && registerForm.get('password')?.touched,
+            'l-my-invalid':
+              registerForm.get('password')?.errors && registerForm.get('password')?.touched
+          }"
+          for="password_input"
+          class="absolute start-1 top-2 z-10 origin-[0] p-1 px-2 font-bold text-sm text-gray-500 bg-gray-200 duration-300 transform -translate-y-4 scale-75 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-emerald-400 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
         >
+          Password
+        </label>
       </div>
+      @if (registerForm.get('password')?.errors && registerForm.get('password')?.touched) {
+      <div class="bg-red-400 p-5 my-2 rounded-3xl font-bold">
+        @if (registerForm.get('password')?.getError('required')) {
+        <p class="text-l">Password is Requaired !!!!</p>
+        } @if (registerForm.get('password')?.getError('pattern')) {
+        <p class="text-l">Password Format Not Valid !!!!</p>
+        }
+      </div>
+      }
+
       <div class="relative py-2">
         <input
+          [class]="{
+            'my-valid':
+              !registerForm.get('rePassword')?.errors &&
+              registerForm.get('rePassword')?.touched &&
+              !registerForm?.getError('misMatch'),
+            'my-invalid':
+              (registerForm.get('rePassword')?.errors || registerForm?.getError('misMatch')) &&
+              registerForm.get('rePassword')?.touched
+          }"
           formControlName="rePassword"
           type="password"
-          id="floating_outlined"
-          class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-emerald-400 peer"
+          id="repassword_input"
+          class="peer block w-full px-2.5 pb-2.5 pt-4 text-sm text-gray-900 bg-transparent rounded-lg border border-gray-300 focus:outline-none focus:ring-0 focus:border-emerald-400"
           placeholder=" "
         />
         <label
-          for="floating_outlined"
-          class="absolute font-bold text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-gray-200 px-2 peer-focus:px-2 peer-focus:text-emerald-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
-          >RePassword</label
+          [class]="{
+            'l-my-valid':
+              !registerForm.get('rePassword')?.errors &&
+              registerForm.get('rePassword')?.touched &&
+              !registerForm?.getError('misMatch'),
+            'l-my-invalid':
+              (registerForm.get('rePassword')?.errors || registerForm?.getError('misMatch')) &&
+              registerForm.get('rePassword')?.touched
+          }"
+          for="repassword_input"
+          class="absolute start-1 top-2 z-10 origin-[0] p-1 px-2 font-bold text-sm text-gray-500 bg-gray-200 duration-300 transform -translate-y-4 scale-75 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-emerald-400 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
         >
+          RePassword
+        </label>
       </div>
+      @if ((registerForm.get('rePassword')?.errors || registerForm?.getError('misMatch')) &&
+      registerForm.get('rePassword')?.touched) {
+      <div class="bg-red-400 p-5 my-2 rounded-3xl font-bold">
+        @if (registerForm.get('rePassword')?.getError('required')) {
+        <p class="text-l">RePassword is Required !!!!</p>
+        } @if (registerForm?.getError('misMatch')) {
+        <p class="text-l">RePassword Not Match Password !!!!</p>
+        }
+      </div>
+      }
+
       <div class="relative py-2">
         <input
+          [class]="{
+            'my-valid': !registerForm.get('phone')?.errors && registerForm.get('phone')?.touched,
+            'my-invalid': registerForm.get('phone')?.errors && registerForm.get('phone')?.touched
+          }"
           formControlName="phone"
           type="tel"
-          id="floating_outlined"
-          class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-emerald-400 peer"
+          id="phone_input"
+          class="peer block w-full px-2.5 pb-2.5 pt-4 text-sm text-gray-900 bg-transparent rounded-lg border border-gray-300 focus:outline-none focus:ring-0 focus:border-emerald-400"
           placeholder=" "
         />
         <label
-          for="floating_outlined"
-          class="absolute font-bold text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-gray-200 px-2 peer-focus:px-2 peer-focus:text-emerald-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
-          >Phone</label
+          [class]="{
+            'l-my-valid': !registerForm.get('phone')?.errors && registerForm.get('phone')?.touched,
+            'l-my-invalid': registerForm.get('phone')?.errors && registerForm.get('phone')?.touched
+          }"
+          for="phone_input"
+          class="absolute start-1 top-2 z-10 origin-[0] p-1 px-2 font-bold text-sm text-gray-500 bg-gray-200 duration-300 transform -translate-y-4 scale-75 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-emerald-400 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
         >
+          Phone
+        </label>
       </div>
+      @if (registerForm.get('phone')?.errors && registerForm.get('phone')?.touched) {
+      <div class="bg-red-400 p-5 my-2 rounded-3xl font-bold">
+        @if (registerForm.get('phone')?.getError('required')) {
+        <p class="text-l">Phone is Required !!!!</p>
+        } @if (registerForm.get('phone')?.getError('pattern')) {
+        <p class="text-l">Phone Format Not Valid !!!!</p>
+        }
+      </div>
+      }
 
       <button [disabled]="registerForm.invalid" class="mt-1.5 main-btn">register</button>
     </form>

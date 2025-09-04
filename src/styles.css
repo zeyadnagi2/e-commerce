@@ -92,3 +92,19 @@ body {
 .main-btn {
   @apply disabled:bg-gray-500 disabled:cursor-no-drop bg-green-500 cursor-pointer p-1 w-full block rounded-xl hover:bg-green-400 duration-500 text-white font-bold;
 }
+
+.my-valid {
+  @apply border-4 outline-2 focus:border-green-600 border-green-400 outline-green-900;
+}
+
+.l-my-valid {
+  @apply text-green-900;
+}
+
+.my-invalid {
+  @apply border-4 outline-2 focus:border-red-600 border-red-400 outline-red-900;
+}
+
+.l-my-invalid {
+  @apply text-red-900;
+}
