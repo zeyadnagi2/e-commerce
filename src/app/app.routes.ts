@@ -9,25 +9,39 @@ import { BrandsComponent } from './features/components/brands/brands.component';
 import { CategoriesComponent } from './features/components/categories/categories.component';
 import { CartComponent } from './features/components/cart/cart.component';
 import { ProductsComponent } from './features/components/products/products.component';
+import { authGuard } from './core/guards/auth-guard';
 
 export const routes: Routes = [
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
 
-    {path:'' , redirectTo:'home' , pathMatch:'full'},
+  {
+    path: '',
+    component: AuthLayoutComponent,
+    children: [
+      { path: 'login', component: LoginComponent, title: 'Login' },
+      { path: 'register', component: RegisterComponent, title: 'Register' },
+    ],
+  },
 
-    {path:'' , component:AuthLayoutComponent , children:[
-        {path: 'login' , component:LoginComponent , title:'Login'},
-        {path: 'register' , component:RegisterComponent , title:'Register'}
-    ]},
-
-    {path:'' , component:MainLayoutComponent , children:[
-        {path:'home' , component:HomeComponent , title:'Home'},
-        {path:'brands' , component:BrandsComponent , title:'Brands'},
-        {path:'categories' , component:CategoriesComponent , title:'Categories'},
-        {path:'cart' , component:CartComponent , title:'Cart'},
-        {path:'products' , component:ProductsComponent , title:'Products'},
-        {path:'p-details/:p_id' , loadComponent: ()=> import('./features/components/p-details/p-details.component').then((c)=>c.PDetailsComponent) , title:'Product Details'},
-        
-    ]},
-    {path:"**" , component:NotfoundComponent , title:'404'}
-
+  {
+    path: '',
+    canActivate: [authGuard],
+    component: MainLayoutComponent,
+    children: [
+      { path: 'home', component: HomeComponent, title: 'Home' },
+      { path: 'brands', component: BrandsComponent, title: 'Brands' },
+      { path: 'categories', component: CategoriesComponent, title: 'Categories' },
+      { path: 'cart', component: CartComponent, title: 'Cart' },
+      { path: 'products', component: ProductsComponent, title: 'Products' },
+      {
+        path: 'p-details/:p_id',
+        loadComponent: () =>
+          import('./features/components/p-details/p-details.component').then(
+            (c) => c.PDetailsComponent
+          ),
+        title: 'Product Details',
+      },
+    ],
+  },
+  { path: '**', component: NotfoundComponent, title: '404' },
 ];

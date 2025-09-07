@@ -10,6 +10,7 @@ import {
 import { log } from 'console';
 import { AuthService } from '../../../shared/services/authentication/auth.service';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +22,7 @@ export class LoginComponent {
   private readonly _FormBuilder = inject(FormBuilder);
   private readonly _AuthService = inject(AuthService);
   private readonly _Router = inject(Router);
+  private readonly _CookieService = inject(CookieService);
 
   loginForm: FormGroup = this._FormBuilder.group({
     email: [null, [Validators.required, Validators.email]],
@@ -32,6 +34,8 @@ export class LoginComponent {
       this._AuthService.SignIn(this.loginForm.value).subscribe({
         next: (res) => {
           if (res.message === 'success') {
+            this._CookieService.set('token', res.token);
+            this._AuthService.decodeToken();
             this._Router.navigate(['/home']);
           }
         },
