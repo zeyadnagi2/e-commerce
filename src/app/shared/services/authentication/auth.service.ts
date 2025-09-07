@@ -10,11 +10,11 @@ import { Observable } from 'rxjs';
 export class AuthService {
   private readonly _HttpClient = inject(HttpClient);
 
-  SignUp(registerData: object): Observable<any> {
-    return this._HttpClient.post(`${environment.baseUrl}/api/v1/auth/signup`, registerData);
-  }
-
   SignIn(loginData: object): Observable<any> {
     return this._HttpClient.post(`${environment.baseUrl}/api/v1/auth/signin`, loginData);
+  }
+
+  SignUp(registerData: object): Observable<any> {
+    return this._HttpClient.post(`${environment.baseUrl}/api/v1/auth/signup`, registerData);
   }
 }

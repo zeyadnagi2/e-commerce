@@ -1,14 +1,15 @@
 import { Component, inject } from '@angular/core';
 import {
   AbstractControl,
+  FormBuilder,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
 import { log } from 'console';
-import { AuthService } from '../../../authentication/auth.service';
+import { AuthService } from '../../../shared/services/authentication/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -17,15 +18,24 @@ import { AuthService } from '../../../authentication/auth.service';
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
+  private readonly _FormBuilder = inject(FormBuilder);
   private readonly _AuthService = inject(AuthService);
   private readonly _Router = inject(Router);
 
-  loginForm: FormGroup = new FormGroup({
-    email: new FormControl(null, [Validators.required, Validators.email]),
-    password: new FormControl(null, [Validators.required, Validators.pattern(/^\w{6,10}$/)]),
+  loginForm: FormGroup = this._FormBuilder.group({
+    email: [null, [Validators.required, Validators.email]],
+    password: [null, [Validators.required, Validators.pattern(/^\w{6,10}$/)]],
   });
 
-  register(): void {
-    
+  login() {
+    if (this.loginForm.valid) {
+      this._AuthService.SignIn(this.loginForm.value).subscribe({
+        next: (res) => {
+          if (res.message === 'success') {
+            this._Router.navigate(['/home']);
+          }
+        },
+      });
+    }
   }
 }
