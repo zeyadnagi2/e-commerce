@@ -1,4 +1,4 @@
-<section class="main-section">
+<!-- <section class="main-section">
   <h1 class="section-head">Catergories</h1>
   <div class="main-container">
     <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
@@ -15,5 +15,66 @@
       </div>
       }
     </div>
+  </div>
+</section> -->
+
+<section class="main-section">
+  <h1 class="section-head">Catergories</h1>
+
+  <div class="main-container">
+    <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3">
+      @for (category of pagedCategories; track category._id) {
+        <div class="outter p-2">
+          <div class="product p-3 cursor-pointer">
+            <img [src]="category.image" class="w-full block h-[350px]" [alt]="category.slug" />
+            <div class="px-3">
+              <h1 class="text-gray-700 font-bold pt-2 text-center">
+                {{ category.name }}
+              </h1>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Pager -->
+    @if (totalPages > 1) {
+      <div class="flex flex-wrap items-center justify-center gap-2 mt-6">
+        <button
+          type="button"
+          class="px-3 py-1 rounded border cursor-pointer disabled:opacity-50"
+          (click)="prevPage()"
+          [disabled]="currentPage === 1"
+          aria-label="Previous page"
+        >
+          Prev
+        </button>
+
+        <!-- Numbered pages (windowed) -->
+        @for (p of visiblePages; track p) {
+          <button
+            type="button"
+            class="px-3 py-1 cursor-pointer rounded border"
+            [class.bg-emerald-500]="p === currentPage"
+            [class.text-white]="p === currentPage"
+            (click)="goToPage(p)"
+            [attr.aria-current]="p === currentPage ? 'page' : null"
+          >
+            {{ p }}
+          </button>
+        }
+
+        <button
+          type="button"
+          class="px-3 py-1 rounded border cursor-pointer disabled:opacity-50"
+          (click)="nextPage()"
+          [disabled]="currentPage === totalPages"
+          aria-label="Next page"
+        >
+          Next
+        </button>
+
+      </div>
+    }
   </div>
 </section>
