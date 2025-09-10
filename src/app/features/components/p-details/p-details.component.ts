@@ -3,16 +3,18 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ProductsService } from '../../../shared/services/Products/products.service';
 import { IProduct } from '../../../core/interfaces/iproduct.interface';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
+import { CartService } from '../../../shared/services/Cart/cart.service';
 
 @Component({
   selector: 'app-p-details',
-  imports: [CarouselModule ,RouterLink],
+  imports: [CarouselModule, RouterLink],
   templateUrl: './p-details.component.html',
   styleUrl: './p-details.component.css',
 })
 export class PDetailsComponent implements OnInit {
   private readonly _ActivatedRoute = inject(ActivatedRoute);
   private readonly _ProductsService = inject(ProductsService);
+  private readonly _CartService = inject(CartService);
 
   productDetails: IProduct = {} as IProduct;
   productId!: string;
@@ -27,6 +29,17 @@ export class PDetailsComponent implements OnInit {
     this._ProductsService.getSpacificProduct(this.productId).subscribe({
       next: (res) => {
         this.productDetails = res.data;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  addToCart(p_id: string) {
+    this._CartService.AddProductToCart(p_id).subscribe({
+      next: (res) => {
+        console.log(res);
       },
       error: (err) => {
         console.log(err);

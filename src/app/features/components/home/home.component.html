@@ -15,19 +15,28 @@
     <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
       @for (product of products.slice(0,12); track product._id) {
       <div class="outter p-2">
-        <div class="product p-3 cursor-pointer" [routerLink]="['/p-details', product._id]">
-          <img [src]="product.imageCover" class="w-full block" [alt]="product.title" />
-          <div class="px-3">
-            <h1 class="text-gray-700 font-bold pt-1.5">
-              <span class="text-black">Title:</span> {{ product.title.split(' ', 3).join(' ') }}
-            </h1>
-            <h1 class="text-gray-700 font-bold pt-1.5">
-              <span class="text-black">Price:</span> {{ product.price }}
-            </h1>
-            <h1 class="text-gray-700 font-bold pt-1.5">
-              <span class="text-black">Category:</span> {{ product.category.name }}
-            </h1>
+        <div class="product p-3 cursor-pointer group relative">
+          <div [routerLink]="['/p-details', product._id]">
+            <img [src]="product.imageCover" class="w-full block" [alt]="product.title" />
+            <div class="px-3">
+              <h1 class="text-gray-700 font-bold pt-1.5">
+                <span class="text-black">Title:</span> {{ product.title.split(' ', 3).join(' ') }}
+              </h1>
+              <h1 class="text-gray-700 font-bold pt-1.5">
+                <span class="text-black">Price:</span> {{ product.price }}
+              </h1>
+              <h1 class="text-gray-700 font-bold pt-1.5">
+                <span class="text-black">Category:</span> {{ product.category.name }}
+              </h1>
+            </div>
           </div>
+
+          <button
+            (click)="addToCart(product._id)"
+            class="main-btn-90 w-4/5 absolute bottom-3 left-1/2 -translate-x-1/2 hidden group-hover:flex justify-center opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 ease-in-out"
+          >
+            Add To Cart
+          </button>
         </div>
       </div>
       }

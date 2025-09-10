@@ -6,16 +6,16 @@ import { IProduct } from '../../../core/interfaces/iproduct.interface';
 import { CategoriesSliderComponent } from './components/categories-slider/categories-slider.component';
 import { MainSliderComponent } from './components/main-slider/main-slider.component';
 import { RouterLink } from '@angular/router';
+import { CartService } from '../../../shared/services/Cart/cart.service';
 
 @Component({
   selector: 'app-home',
-  imports: [CategoriesSliderComponent, MainSliderComponent, CarouselModule,RouterLink],
+  imports: [CategoriesSliderComponent, MainSliderComponent, CarouselModule, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
-
-  constructor(private _ProductsService: ProductsService) {}
+  constructor(private _ProductsService: ProductsService, private _CartService: CartService) {}
 
   products!: IProduct[];
 
@@ -24,6 +24,17 @@ export class HomeComponent implements OnInit {
       next: (res) => {
         this.products = res.data;
         console.log(this.products);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  addToCart(p_id: string) {
+    this._CartService.AddProductToCart(p_id).subscribe({
+      next: (res) => {
+        console.log(res);
       },
       error: (err) => {
         console.log(err);

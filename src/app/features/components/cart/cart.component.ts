@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CartService } from '../../../shared/services/Cart/cart.service';
+import { ICart } from '../../../core/interfaces/icart.interface';
 
 @Component({
   selector: 'app-cart',
@@ -10,14 +11,33 @@ import { CartService } from '../../../shared/services/Cart/cart.service';
 export class CartComponent implements OnInit {
   private readonly _CartService = inject(CartService);
 
+  cartData: ICart = {} as ICart;
+
   ngOnInit(): void {
     this._CartService.GetLoggedUserCart().subscribe({
       next: (res) => {
         console.log(res);
-      },
-      error: (err) => {
-        console.log(err);
+        this.cartData = res.data;
       },
     });
   }
+
+  changeCount(p_id: string, newCount: number) {
+    this._CartService.UpdateCartProductQuantity(p_id, newCount).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.cartData = res.data;
+      },
+    });
+  }
+
+  deleteProduct(p_id: string) {
+    this._CartService.RemoveSpecificCartItem(p_id).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.cartData = res.data;
+      },
+    });
+  }
+
 }
