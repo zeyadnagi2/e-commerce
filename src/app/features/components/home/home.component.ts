@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
-
 import { ProductsService } from '../../../shared/services/Products/products.service';
 import { IProduct } from '../../../core/interfaces/iproduct.interface';
 import { CategoriesSliderComponent } from './components/categories-slider/categories-slider.component';
 import { MainSliderComponent } from './components/main-slider/main-slider.component';
 import { RouterLink } from '@angular/router';
 import { CartService } from '../../../shared/services/Cart/cart.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +15,11 @@ import { CartService } from '../../../shared/services/Cart/cart.service';
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
-  constructor(private _ProductsService: ProductsService, private _CartService: CartService) {}
+  constructor(
+    private _ToastrService: ToastrService,
+    private _ProductsService: ProductsService,
+    private _CartService: CartService
+  ) {}
 
   products!: IProduct[];
 
@@ -35,9 +39,11 @@ export class HomeComponent implements OnInit {
     this._CartService.AddProductToCart(p_id).subscribe({
       next: (res) => {
         console.log(res);
+        this._ToastrService.success(res.message, res.status);
       },
       error: (err) => {
         console.log(err);
+        this._ToastrService.error(err.error.message, err.error.statusMsg);
       },
     });
   }

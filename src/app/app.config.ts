@@ -10,6 +10,8 @@ import { routes } from './app.routes';
 import {CookieService} from 'ngx-cookie-service';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { HttpClient, provideHttpClient, withFetch } from '@angular/common/http';
+import { provideToastr } from 'ngx-toastr';
+
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,6 +21,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch()),
     provideClientHydration(withEventReplay()),
     provideAnimations(),
-    importProvidersFrom(CookieService)
+    importProvidersFrom(CookieService),
+    provideToastr(),
   ],
 };
