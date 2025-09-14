@@ -1,1 +1,19 @@
-<p>brands works!</p>
+<section class="main-section">
+  <h1 class="section-head">Popular Brands</h1>
+  <div class="main-container">
+    <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+      @for (brand of brands ; track brand._id) {
+      <div class="outter p-2">
+        <div class="product p-3 cursor-pointer">
+          <img [src]="brand.image" class="w-full block" [alt]="brand.slug" />
+          <div class="px-3">
+            <h1 class="text-gray-800 text-2xl text-center pt-3">
+              {{ brand.name }}
+            </h1>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</section>
