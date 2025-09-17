@@ -4,12 +4,17 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class OrdersService {
   private readonly _HttpClient = inject(HttpClient);
 
-  // CheckOutSession():Observable<any>{
-  //   return this._HttpClient.post(`${environment.baseUrl}/api/v1/orders/checkout-session `)
-  // }
+  CheckOutSession(c_id: string, shipingData: object): Observable<any> {
+    return this._HttpClient.post(
+      `${environment.baseUrl}/api/v1/orders/checkout-session/${c_id}?url=${environment.domain}`,
+      {
+        shippingAddress: shipingData,
+      }
+    );
+  }
 }

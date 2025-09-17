@@ -40,6 +40,10 @@
         </div>
       </div>
     </div>
+    } @if (cartData.products.length > 0) {
+    <button [routerLink]="['/checkout', cartData._id]" class="main-btn mt-16 h-[70px] text-4xl">
+      Check Out
+    </button>
     }
   </div>
 </section>

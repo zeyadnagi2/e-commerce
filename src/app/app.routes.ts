@@ -10,6 +10,8 @@ import { CategoriesComponent } from './features/components/categories/categories
 import { CartComponent } from './features/components/cart/cart.component';
 import { ProductsComponent } from './features/components/products/products.component';
 import { authGuard } from './core/guards/auth-guard';
+import { CheckoutComponent } from './features/components/Checkout/checkout/checkout.component';
+import { AllordersComponent } from './features/components/AllOrders/allorders/allorders.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -33,6 +35,8 @@ export const routes: Routes = [
       { path: 'categories', component: CategoriesComponent, title: 'Categories' },
       { path: 'cart', component: CartComponent, title: 'Cart' },
       { path: 'products', component: ProductsComponent, title: 'Products' },
+      { path: 'checkout/:c_id', component: CheckoutComponent, title: 'Check-Out' },
+      { path: 'allorders', component: AllordersComponent, title: 'AllOrders' },
       {
         path: 'p-details/:p_id',
         loadComponent: () =>
