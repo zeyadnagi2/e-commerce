@@ -1,1 +1,61 @@
-<p>checkout works!</p>
+<section class="main-section">
+  <div class="main-container py-[80px]">
+    <h1 class="section-head">Checkout Now</h1>
+    <form [formGroup]="checkoutFrom" (ngSubmit)="checkout()">
+      <div class="relative py-2">
+        <input
+          formControlName="details"
+          type="text"
+          id="floating_outlined"
+          class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-emerald-400 peer"
+          placeholder=" "
+        />
+        <label
+          for="floating_outlined"
+          class="absolute p-1 font-bold text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-gray-200 px-2 peer-focus:px-2 peer-focus:text-emerald-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
+          >Details</label
+        >
+      </div>
+
+      <div class="relative py-2">
+        <input
+          formControlName="phone"
+          type="tel"
+          id="floating_outlined"
+          class="peer block w-full px-2.5 pb-2.5 pt-4 text-sm text-gray-900 bg-transparent rounded-lg border border-gray-300 focus:outline-none focus:ring-0 focus:border-emerald-400"
+          placeholder=" "
+        />
+        <label
+          for="floating_outlined"
+          class="absolute start-1 top-2 z-10 origin-[0] p-1 px-2 font-bold text-sm text-gray-500 bg-gray-200 duration-300 transform -translate-y-4 scale-75 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-emerald-400 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
+        >
+          Phone
+        </label>
+      </div>
+
+      <div class="relative py-2">
+        <input
+          list="citylist"
+          formControlName="city"
+          type="text"
+          id="floating_outlined"
+          class="peer block w-full px-2.5 pb-2.5 pt-4 text-sm text-gray-900 bg-transparent rounded-lg border border-gray-300 focus:outline-none focus:ring-0 focus:border-emerald-400"
+          placeholder=" "
+        />
+        <label
+          for="floating_outlined"
+          class="absolute start-1 top-2 z-10 origin-[0] p-1 px-2 font-bold text-sm text-gray-500 bg-gray-200 duration-300 transform -translate-y-4 scale-75 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-emerald-400 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
+        >
+          City
+        </label>
+        <datalist id="citylist">
+          <option value="cairo"></option>
+          <option value="alex"></option>
+          <option value="giza"></option>
+        </datalist>
+      </div>
+
+      <button [disabled]="checkoutFrom.invalid" class="mt-1.5 main-btn">Payment</button>
+    </form>
+  </div>
+</section>
