@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, input, InputSignal, OnInit } from '@angular/core';
 import { FlowbiteService } from '../../../core/services/flowbite/flowbite.service';
 import { AuthService } from '../../../shared/services/authentication/auth.service';
 import { initFlowbite } from 'flowbite';
@@ -8,7 +8,7 @@ import { CartService } from '../../services/Cart/cart.service';
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })
@@ -22,8 +22,9 @@ export class NavbarComponent implements OnInit {
   ) {}
 
   cartBadge!: number;
-
   userName!: string;
+
+  Check: InputSignal<boolean> = input(false);
 
   ngOnInit(): void {
     this._flowbiteService.loadFlowbite((flowbite) => {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, input, InputSignal, OnInit } from '@angular/core';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { ProductsService } from '../../../shared/services/Products/products.service';
 import { IProduct } from '../../../core/interfaces/iproduct.interface';
@@ -20,6 +20,8 @@ export class HomeComponent implements OnInit {
     private _ProductsService: ProductsService,
     private _CartService: CartService
   ) {}
+
+  FromParent: InputSignal<boolean> = input(false);
 
   products!: IProduct[];
 
