@@ -2,7 +2,7 @@ import { Component, input, InputSignal, OnInit } from '@angular/core';
 import { FlowbiteService } from '../../../core/services/flowbite/flowbite.service';
 import { AuthService } from '../../../shared/services/authentication/auth.service';
 import { initFlowbite } from 'flowbite';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { CartService } from '../../services/Cart/cart.service';
 
@@ -27,11 +27,15 @@ export class NavbarComponent implements OnInit {
   Check: InputSignal<boolean> = input(false);
 
   ngOnInit(): void {
-    this._flowbiteService.loadFlowbite((flowbite) => {
+    this._flowbiteService.loadFlowbite(() => {
       initFlowbite();
     });
 
+    // 🔹 if token exists, decode it & set username automatically
     if (this._CookieService.get('token')) {
+      this._AuthService.decodeToken();
+      this.userName = this._AuthService.userInfo?.name;
+
       this._CartService.GetLoggedUserCart().subscribe({
         next: (res) => {
           this.cartBadge = res.numOfCartItems;
@@ -50,11 +54,6 @@ export class NavbarComponent implements OnInit {
     this._Router.navigate(['/login']);
     this._CookieService.delete('token');
     this._AuthService.userInfo = null;
-  }
-
-  showName() {
-    this._AuthService.decodeToken();
-    this.userName = this._AuthService.userInfo.name;
-    console.log(this._AuthService.userInfo.name);
+    this.userName = '';
   }
 }
