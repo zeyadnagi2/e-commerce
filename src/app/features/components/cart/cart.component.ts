@@ -35,10 +35,10 @@ export class CartComponent implements OnInit {
   deleteProduct(p_id: string) {
     this._CartService.RemoveSpecificCartItem(p_id).subscribe({
       next: (res) => {
+        this._CartService.cartCount.next(res.numOfCartItems); 
         console.log(res);
         this.cartData = res.data;
       },
     });
   }
-
 }

@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment.development';
@@ -10,6 +10,8 @@ import { CookieService } from 'ngx-cookie-service';
 export class CartService {
   private readonly _HttpClient = inject(HttpClient);
   private readonly _CookieService = inject(CookieService);
+
+  cartCount: BehaviorSubject<number> = new BehaviorSubject(0);
 
   GetLoggedUserCart(): Observable<any> {
     return this._HttpClient.get(`${environment.baseUrl}/api/v1/cart`);

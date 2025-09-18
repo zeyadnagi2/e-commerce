@@ -41,6 +41,7 @@ export class HomeComponent implements OnInit {
     this._CartService.AddProductToCart(p_id).subscribe({
       next: (res) => {
         console.log(res);
+        this._CartService.cartCount.next(res.numOfCartItems);
         this._ToastrService.success(res.message, res.status);
       },
       error: (err) => {

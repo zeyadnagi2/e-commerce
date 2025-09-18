@@ -64,18 +64,20 @@
             >Products</a
           >
         </li>
-        <li class="p-2">
-          <a
-            routerLink="/cart"
-            class="block text-emerald-800 hover:text-emerald-400 transition-all duration-[0.5s] font-bold py-2 px-3 rounded-sm md:p-0"
-            aria-current="page"
-            >Cart</a
-          >
-        </li>
       </ul>
       <ul
         class="ms-auto font-medium flex flex-col p-4 md:p-2 mt-4 border rounded-lg md:flex-row md:items-center md:space-x-3 rtl:space-x-reverse md:mt-0 md:border-0"
       >
+        <li class="p-2 relative">
+          <a
+            routerLink="/cart"
+            class="block text-emerald-800 hover:text-emerald-400 transition-all duration-[0.5s] font-bold py-2 px-3 rounded-sm md:p-0"
+            aria-current="page"
+          >
+            <span class="absolute top-0 start-0">{{cartBadge}}</span>
+            <i class="fa-solid fa-cart-arrow-down fa-lg"></i>
+          </a>
+        </li>
         <li class="text-blue-800 hover:text-blue-600 duration-500">
           <a href=""> <i class="fab fa-facebook"></i> </a>
         </li>
