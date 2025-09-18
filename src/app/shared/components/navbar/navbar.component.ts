@@ -30,12 +30,12 @@ export class NavbarComponent implements OnInit {
       initFlowbite();
     });
 
-    if(this._CookieService.get('token')){
+    if (this._CookieService.get('token')) {
       this._CartService.GetLoggedUserCart().subscribe({
-      next: (res) => {
-        this.cartBadge = res.numOfCartItems;
-      },
-    });
+        next: (res) => {
+          this.cartBadge = res.numOfCartItems;
+        },
+      });
     }
 
     this._CartService.cartCount.subscribe({
@@ -45,7 +45,7 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  logOut() { 
+  logOut() {
     this._Router.navigate(['/login']);
     this._CookieService.delete('token');
     this._AuthService.userInfo = null;

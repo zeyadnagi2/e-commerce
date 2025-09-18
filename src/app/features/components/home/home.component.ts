@@ -28,7 +28,6 @@ export class HomeComponent implements OnInit {
       next: (res) => {
         this.products = res.data;
         console.log(this.products);
-        this._ToastrService.success(res.message, res.status);
       },
       error: (err) => {
         console.log(err);

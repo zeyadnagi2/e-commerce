@@ -11,6 +11,7 @@ import { log } from 'console';
 import { AuthService } from '../../../shared/services/authentication/auth.service';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -23,6 +24,7 @@ export class LoginComponent {
   private readonly _AuthService = inject(AuthService);
   private readonly _Router = inject(Router);
   private readonly _CookieService = inject(CookieService);
+  private readonly _ToastrService = inject(ToastrService);
 
   loginForm: FormGroup = this._FormBuilder.group({
     email: [null, [Validators.required, Validators.email]],
@@ -37,6 +39,7 @@ export class LoginComponent {
             this._CookieService.set('token', res.token);
             this._AuthService.decodeToken();
             this._Router.navigate(['/home']);
+            this._ToastrService.success(res.message, res.status);
           }
         },
       });
