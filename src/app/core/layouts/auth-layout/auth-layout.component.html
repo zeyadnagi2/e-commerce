@@ -1,4 +1,5 @@
-<div>
-  <app-navbar [Check]="false"></app-navbar>
-</div>
-<router-outlet></router-outlet>
+<app-navbar [Check]="false" class="fixed top-0 inset-x-0 z-50 block w-full"> </app-navbar>
+
+<main class="pt-24">
+  <router-outlet></router-outlet>
+</main>

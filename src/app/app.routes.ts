@@ -12,6 +12,7 @@ import { ProductsComponent } from './features/components/products/products.compo
 import { authGuard } from './core/guards/auth-guard';
 import { CheckoutComponent } from './features/components/Checkout/checkout/checkout.component';
 import { AllordersComponent } from './features/components/AllOrders/allorders/allorders.component';
+import { WishlistComponent } from './features/components/Wishlist/wishlist/wishlist.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -32,6 +33,7 @@ export const routes: Routes = [
     children: [
       { path: 'home', component: HomeComponent, title: 'Home' },
       { path: 'brands', component: BrandsComponent, title: 'Brands' },
+      { path: 'wishlist', component: WishlistComponent, title: 'Wishlist' },
       { path: 'categories', component: CategoriesComponent, title: 'Categories' },
       { path: 'cart', component: CartComponent, title: 'Cart' },
       { path: 'products', component: ProductsComponent, title: 'Products' },
