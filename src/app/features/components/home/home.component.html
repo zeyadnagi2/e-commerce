@@ -40,12 +40,19 @@
             Add To Cart
           </button>
 
-          <!-- ❤️ Add to Favorite -->
+          <!-- ❤️ Favorite (toggle + state-bound icon) -->
           <button
-            (click)="addToWishlist(product._id); $event.stopPropagation()"
-            class="absolute top-3 right-3 text-black bg-transparent w-10 h-10 flex items-center justify-center text-2xl transition duration-300"
+            (click)="toggleWishlist(product, $event)"
+            class="absolute top-3 right-3 bg-transparent w-10 h-10 flex items-center justify-center text-2xl transition duration-300"
+            [attr.aria-pressed]="isInWishlist(product._id)"
+            [title]="isInWishlist(product._id) ? 'In wishlist' : 'Add to wishlist'"
           >
-            <i class="fa-solid fa-heart"></i>
+            <i
+              class="fa-heart transition"
+              [class.fa-solid]="isInWishlist(product._id)"
+              [class.fa-regular]="!isInWishlist(product._id)"
+              [class.text-red-500]="isInWishlist(product._id)"
+            ></i>
           </button>
         </div>
       </div>

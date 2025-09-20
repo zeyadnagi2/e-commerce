@@ -24,14 +24,14 @@ export class WishlistComponent implements OnInit {
     });
   }
 
-  deleteProduct(p_id:string){
+  deleteProduct(p_id: string) {
     this._WishlistService.RemoveProductFromWishlist(p_id).subscribe({
-      next:(res)=>{
-        console.log(res);
-        this.wishData = res.data;
+      next: (res) => {
+        // remove locally (creates a new array reference)
+        this.wishData = this.wishData.filter((i) => i._id !== p_id);
         this._ToastrService.success(res.message, res.status);
-      }
-    })
-
+      },
+      error: () => this._ToastrService.error('Failed to remove item'),
+    });
   }
 }
