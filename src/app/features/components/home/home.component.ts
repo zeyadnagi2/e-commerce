@@ -7,6 +7,7 @@ import { MainSliderComponent } from './components/main-slider/main-slider.compon
 import { RouterLink } from '@angular/router';
 import { CartService } from '../../../shared/services/Cart/cart.service';
 import { ToastrService } from 'ngx-toastr';
+import { WishlistService } from '../../../shared/services/Wishlist/wishlist.service';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private _ToastrService: ToastrService,
     private _ProductsService: ProductsService,
-    private _CartService: CartService
+    private _CartService: CartService,
+    private _WishlistService: WishlistService
   ) {}
 
   FromParent: InputSignal<boolean> = input(false);
@@ -43,6 +45,19 @@ export class HomeComponent implements OnInit {
       next: (res) => {
         console.log(res);
         this._CartService.cartCount.next(res.numOfCartItems);
+        this._ToastrService.success(res.message, res.status);
+      },
+      error: (err) => {
+        console.log(err);
+        this._ToastrService.error(err.error.message, err.error.statusMsg);
+      },
+    });
+  }
+
+  addToWishlist(p_id: string) {
+    this._WishlistService.AddProductToWishlist(p_id).subscribe({
+      next: (res) => {
+        console.log(res);
         this._ToastrService.success(res.message, res.status);
       },
       error: (err) => {

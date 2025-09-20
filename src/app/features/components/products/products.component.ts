@@ -4,7 +4,7 @@ import { IProduct } from '../../../core/interfaces/iproduct.interface';
 import { RouterLink } from '@angular/router';
 import { CartService } from '../../../shared/services/Cart/cart.service';
 import { ToastrService } from 'ngx-toastr';
-
+import { WishlistService } from '../../../shared/services/Wishlist/wishlist.service';
 
 @Component({
   selector: 'app-products',
@@ -13,7 +13,12 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './products.component.css',
 })
 export class ProductsComponent implements OnInit {
-  constructor(private _ProductsService: ProductsService , private _CartService:CartService ,private _ToastrService: ToastrService) {}
+  constructor(
+    private _ProductsService: ProductsService,
+    private _CartService: CartService,
+    private _ToastrService: ToastrService,
+    private _WishlistService: WishlistService
+  ) {}
 
   products!: IProduct[];
 
@@ -28,7 +33,7 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-    addToCart(p_id: string) {
+  addToCart(p_id: string) {
     this._CartService.AddProductToCart(p_id).subscribe({
       next: (res) => {
         console.log(res);
@@ -36,7 +41,21 @@ export class ProductsComponent implements OnInit {
         this._ToastrService.success(res.message, res.status);
       },
       error: (err) => {
-        console.log(err); 
+        console.log(err);
+        this._ToastrService.error(err.error.message, err.error.statusMsg);
+      },
+    });
+  }
+
+  
+  addToWishlist(p_id: string) {
+    this._WishlistService.AddProductToWishlist(p_id).subscribe({
+      next: (res) => {
+        console.log(res);
+        this._ToastrService.success(res.message, res.status);
+      },
+      error: (err) => {
+        console.log(err);
         this._ToastrService.error(err.error.message, err.error.statusMsg);
       },
     });

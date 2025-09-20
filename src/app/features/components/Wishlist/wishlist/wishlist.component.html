@@ -1,1 +1,26 @@
-<p>wishlist works!</p>
+<section class="main-section">
+  <div class="main-container">
+    <h1 class="section-head my-3">Fav Products List</h1>
+
+    @for (favProduct of wishData; track favProduct._id) {
+    <div
+      class="flex flex-wrap items-center justify-around border-2 border-e-neutral-400 rounded-3xl p-3 my-3"
+    >
+      <div class="w-full lg:w-1/6">
+        <img [src]="favProduct.imageCover" class="w-full block rounded-2xl" alt="" />
+      </div>
+      <div class="w-full lg:w-2/4">
+        <h1 class="font-bold text-4xl py-1">{{ favProduct.title }}</h1>
+        <h1 class="text-2xl py-1 text-gray-600">{{ favProduct.description }}</h1>
+        <h1 class="font-bold text-3xl py-1">
+          {{ favProduct.ratingsAverage }} <i class="fa-solid fa-star text-yellow-400"></i>
+        </h1>
+        <h2 class="font-bold text-3xl text-gray-700 py-1">{{ favProduct.price }} EGP</h2>
+      </div>
+      <div class="w-full lg:w-1/12">
+        <i (click)="deleteProduct(favProduct._id)" class="fa-solid fa-heart text-3xl text-red-600"></i>
+      </div>
+    </div>
+    }
+  </div>
+</section>
